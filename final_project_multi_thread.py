@@ -66,13 +66,10 @@ def core1_alarm_task():
 
         # --- NORMAL LOGIC ---
         if avg_temp < IDEAL_TEMP_MIN:
-            # COLD (Usually blue light, maybe beep if desired)
             blue_led.value(1)
             red_led.value(0)
             
             if not is_muted:
-                # Optional: Beep for cold too? Or just silence.
-                # If you don't want beep for cold, remove this block
                 buzzer.value(1)
                 time.sleep(0.5)
                 buzzer.value(0)
