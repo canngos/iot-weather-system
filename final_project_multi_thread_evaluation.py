@@ -173,6 +173,15 @@ try:
             # Cold
             blue_led.value(1); red_led.value(0); buzzer.value(0)
             
+            if not is_muted:
+                # Non-blocking Rhythmic Beep
+                if time.ticks_diff(current_time, last_beep_time) > BEEP_SPEED:
+                    buzzer_state = not buzzer_state # Toggle
+                    buzzer.value(buzzer_state)
+                    last_beep_time = current_time
+            else:
+                buzzer.value(0)
+            
         elif raw_temp > IDEAL_TEMP_MAX:
             # Hot
             blue_led.value(0); red_led.value(1)
